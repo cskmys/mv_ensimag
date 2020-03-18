@@ -1,0 +1,69 @@
+= ReadMe
+
+One stop place to have things up and running
+
+== Setup
+=== VCS(Git)
+The steps below should work for any git based vcs.
+[NOTE]
+====
+Only for ensimag gitlab:
+
+* Windows:
+----
+git config --global http.sslVerify false
+----
+* Linux:
+----
+sudo echo -n | openssl s_client -showcerts -connect gitlab.ensimag.fr:443 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+----
+
+There's an issue with certificate used by ensimag's gitlab, hence, you need to run the above command to allow your git to talk to ensimag's gitlab. 
+====
+* Install git
+* Setting up vscode
+** Install *Git graph* extension
+
+=== Using Git in vscode
+
+==== Setting up project
+* Create project by adding base file
+* Create repo on git and note its url: https://<gitaddress>/<projectname>.git
+* Menu > View > SCM > + > <folder name> (in command palette)
+* Click Git Graph icon besides Panel
+* Click setting > Repository Settings > 
+* Add User > User Details > Name and User Email(uncheck Global thingy)
+* Remote Configuration > Add Remote > Name: origin, Fetch URL: https://<gitusername>:<gitpassword>@<gitaddress>/<projectname>.git, Push URL: <blank>
+* ...(on top-right of side panel) > Commit All changes and type commit message in Command palette
+* ... > Push > select Ok to Publish Branch on upstream
+
+==== Create a branch
+* ...(on top-right of side panel) > Checkout to... > + Create new branch(in Command palette) > type Branch name
+* ... > Push > select Ok to Publish Branch on upstream
+
+==== Editing a branch
+* ...(on top-right of side panel) > Checkout to... > origin/<branchname>
+* edit files
+* ... > Commit all >  Always to automatically stage all changes and then commit always > Commit message(command palette)
+* ... > Push
+
+==== Merging branch to master
+* ...(on top-right of side panel) > Checkout to... > origin/master
+* Menu > View > SCM > Git Graph (icon besides Panel) > Git Graph(tab) > right click on <branchname>|origin > Merge into current branch... > Ok
+* ... > Push
+
+==== Creating tag from master
+* ...(on top-right of side panel) > Checkout to... > origin/master
+* Menu > View > SCM > Git Graph (icon besides Panel) > Git Graph(tab) > Select master|origin(click beside the label rather than on it), you should see a dropdown having info about commit
+* right click > Add Tag > Add Tag to Commit(dialog) > Name: <tagName> > select checkbox Push to remote > Click Add Tag
+
+== Using ADOC on vscode
+* Install *AsciiDoc* extension
+* Create and edit your adoc document
++
+[NOTE]
+====
+You can refer https://powerman.name/doc/asciidoc for quick syntax and examples which should suffice for most(if not all) of the documentation.
+====
+* Do Ctrl-Shift-V to open the live preview
+* Open a split view and move the live preview tab to split view
